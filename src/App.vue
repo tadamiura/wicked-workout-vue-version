@@ -1,19 +1,21 @@
 <template>
   <div id="app">
     <the-header></the-header>
+    <div class="d-flex flex-row w-100">
+      <router-view></router-view>
+    </div>
   </div>
 </template>
 
 <script>
-import TheHeader from './components/TheHeader'
+import TheHeader from "./components/TheHeader";
 
 export default {
-  name: 'App',
+  name: "App",
   components: {
-    TheHeader
-  }
-}
+    TheHeader,
+  },
+};
 </script>
 
-<style>
-</style>
+<style></style>
