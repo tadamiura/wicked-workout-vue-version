@@ -1,15 +1,13 @@
 <template>
   <div>
-    <h1>Liste des exercices</h1>
-    <!-- <ul v-for="exercice in exercices" :key="exercice.id">
-        <li>{{ exercice.name }}</li>
-    </ul> -->
+    <exercices-list :exercices="exercices"></exercices-list>
   </div>
 </template>
 
 <script>
-
+import ExercicesList from "./ExercicesList";
 export default {
-    props: ['exercices']
-}
+  components: { ExercicesList },
+  props: ["exercices"],
+};
 </script>
