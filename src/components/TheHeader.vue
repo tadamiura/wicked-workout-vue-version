@@ -9,6 +9,9 @@
     </button>
     <div class="collapse navbar-collapse">
       <ul class="navbar-nav">
+          <li class="nav-item">
+          <a class="nav-link" href="#">Exercice</a>
+        </li>
         <li class="nav-item">
           <a class="nav-link" href="#">Admin</a>
         </li>
