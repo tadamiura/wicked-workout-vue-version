@@ -10,50 +10,44 @@
 </template>
 
 <script>
-import axios from 'axios';
-
-import Exercice from './Exercice/Exercice'
-
+import Exercice from "./Exercice/Exercice";
+import { mapState } from "vuex";
 export default {
-    components: { Exercice },
-    data() {
-        return {
-            exercices : {}
-        }
-    },
-    created() {
-        this.fetchData()
-    },
-    methods: {
-        fetchData() {
-            axios.get('exercices')
-            .then( res => {
-                this.exercices = res.data
-            })
-        }
-    }
-}
+  components: {
+    Exercice,
+  },
+  computed: {
+    ...mapState("exercice", {
+      exercices: "datas", //alias pour nommer datas
+    }),
+  },
+  created() {
+    this.$store.dispatch("exercice/fetchDatas");
+  },
+};
 </script>
 
 <style scoped>
-  @keyframes fromleft {
-    from {
-      transform: translateX(-40px);
-    }
-    to {}
+@keyframes fromleft {
+  from {
+    transform: translateX(-40px);
   }
+  to {
+  }
+}
 
-  @keyframes fromright {
-    from {
-      transform: translateX(20px);
-    }
-    to {}
+@keyframes fromright {
+  from {
+    transform: translateX(20px);
   }
+  to {
+  }
+}
 
-  .left-enter-active {
-    animation: fromleft 1.5s;
-  }
-  .right-enter-active {
-    animation: fromright 1.5s;
-  }
+.left-enter-active {
+  animation: fromleft 3.5s;
+}
+.right-enter-active {
+  animation: fromright 1.5s;
+}
 </style>
