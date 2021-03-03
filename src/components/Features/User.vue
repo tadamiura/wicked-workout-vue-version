@@ -38,7 +38,7 @@ export default {
 <style scoped>
   @keyframes fromleft {
     from {
-      transform: translateX(-20px);
+      transform: translateX(-40px);
     }
     to {}
   }
@@ -51,9 +51,9 @@ export default {
   }
 
   .left-enter-active {
-    animation: fromleft 1s;
+    animation: fromleft 1.5s;
   }
   .right-enter-active {
-    animation: fromright 1s;
+    animation: fromright 1.5s;
   }
 </style>
