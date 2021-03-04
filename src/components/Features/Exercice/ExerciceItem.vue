@@ -4,11 +4,20 @@
       <h5>{{ exercice.name }}</h5>
       <video-embed class="mx-auto" :src="exercice.url_name"></video-embed>
     </div>
-    <button class="btn btn-primary btn-sm float-right">Ajouter à vos favoris</button>
+    <button
+      @click="addOne(exercice)"
+      class="btn btn-primary btn-sm float-right"
+    >
+      Ajouter à vos favoris
+    </button>
   </div>
 </template>
 <script>
+import { mapMutations } from "vuex";
 export default {
   props: ["exercice"],
+  methods: {
+    ...mapMutations("favorite", ["addOne"]),
+  },
 };
 </script>
