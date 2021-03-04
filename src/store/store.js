@@ -41,6 +41,34 @@ const favorite = {
     }
 }
 
+const user = {
+    namespaced: true, 
+    state: {
+        data: {},
+        isLoading: false,
+        isLoggedIn: null,
+        jwtToken: null,
+        errors: []
+    },
+    getters: {
+        isLoading: state => state.isLoading,
+        isLoggedIn: state => state.isLoggedIn,
+        errors: state => state.errors,
+        currentUser: state => state.data,
+        jwtToken: state => state.jwtToken
+    },
+    actions: {
+        async trySignIn(context, credentials) {},
+        async trySignUp(context, user) {},
+        async fetchCurrentUser(context) {}
+    },
+    mutations: {
+        signUpSucess(state) {},
+        signError(state, errors) {},
+        signInSucess(state, data) {},
+        signOut(state)
+    }
+}
 
 const store = new Vuex.Store({
     modules: {
