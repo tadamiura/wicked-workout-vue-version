@@ -1,6 +1,6 @@
 <template>
     <div class="container d-flex flex-column p-3 justify-content-center align-items-center">
-        <h1>Sign In</h1>
+        <h1>Sign Up</h1>
         <form @submit="trySubmit" class="text-left">
             <div class="form-group">
                 <label>Email</label>
