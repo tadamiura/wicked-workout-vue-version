@@ -3,23 +3,28 @@
     <transition name="left" appear>
       <exercice :exercices="exercices" class="w-75"></exercice>
     </transition>
-    <!-- <transition  name="right" appear>
-      <cart :cart="cart" class="w-25"></cart>
-    </transition> -->
+    <transition  name="right" appear>
+      <favorites :favorites="favorites" class="w-25"></favorites>
+    </transition>
   </div>
 </template>
 
 <script>
 import Exercice from "./Exercice/Exercice";
+import Favorites from './Favorites/Favorites'
 import { mapState } from "vuex";
 export default {
   components: {
     Exercice,
+    Favorites
   },
   computed: {
     ...mapState("exercice", {
       exercices: "datas", //alias pour nommer datas
     }),
+    ...mapState("favorite", {
+      favorites: 'datas'//alias pour nommer datas
+    })
   },
   created() {
     this.$store.dispatch("exercice/fetchDatas");

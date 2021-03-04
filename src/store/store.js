@@ -25,10 +25,27 @@ const exercice = {
     }
 }
 
+const favorite = {
+    namespaced: true,
+    state: {
+        datas: []
+    },
+    mutations: {
+        addOne(state, exercice) {
+            state.datas.push(exercice)
+        },
+        deleteOne(state, id) {
+            const index = state.datas.findIndex(data => data.id === id)
+            state.datas.splice(index, 1)
+        }
+    }
+}
+
 
 const store = new Vuex.Store({
     modules: {
-      exercice
+      exercice,
+      favorite
     }
   })
   
