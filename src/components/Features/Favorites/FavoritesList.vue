@@ -1,5 +1,6 @@
 <template>
     <div>
+        <h2>Mes exercices favoris</h2>
         <favorite-item v-for="favorite in favorites" :key="favorite.id" :favorite="favorite"></favorite-item>
     </div>
 </template>

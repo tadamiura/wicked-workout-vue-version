@@ -1,8 +1,8 @@
 <template>
     <div class="d-flex flex-row justify-content-between p-2">
-        <h5>{{ favorite.name }}</h5>
-        <button @click="deleteOne(favorite.id)" class="close">
-            <span>&times;</span>
+        <h7>{{ favorite.name }}</h7>
+        <button @click="deleteOne(favorite.id)" class="btn btn-danger p-1">
+            Supprimer
         </button>
     </div>
 </template>

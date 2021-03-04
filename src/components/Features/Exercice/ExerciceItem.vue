@@ -1,7 +1,7 @@
 <template>
-  <div class="w-30 p-3 product-container d-flex flex-column">
+  <div class="w-30 p-3 exercice-container d-flex flex-column">
     <div>
-      <h5>{{ exercice.name }}</h5>
+      <h7>{{ exercice.name }}</h7>
       <video-embed class="mx-auto" :src="exercice.url_name"></video-embed>
     </div>
     <button
@@ -21,3 +21,5 @@ export default {
   },
 };
 </script>
+<style>
+</style>
