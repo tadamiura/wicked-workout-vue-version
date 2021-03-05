@@ -62,7 +62,7 @@ const user = {
         async trySignIn(context, credentials) {
             try {
                 context.commit("updateIsLoading", true)
-                const response = await axios.post('api/vue/auth', credentials)
+                const response = await axios.post('/vue/auth', credentials)
                 context.commit("signInSuccess", response.data)
                 router.push("/profile")
             } catch(err) {
