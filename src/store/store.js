@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import axios from 'axios'
+import router from '../router'
 
 Vue.use(Vuex)
 
@@ -58,22 +59,72 @@ const user = {
         jwtToken: state => state.jwtToken
     },
     actions: {
-        async trySignIn(context, credentials) {},
-        async trySignUp(context, user) {},
-        async fetchCurrentUser(context) {}
+        async trySignIn(context, credentials) {
+            try {
+                context.commit("updateIsLoading", true)
+                const response = await axios.post('api/vue/auth', credentials)
+                context.commit("signInSuccess", response.data)
+                router.push("/profile")
+            } catch(err) {
+                context.commit("signError", err)
+            }
+        },
+        async trySignUp(context, user) {
+            try {
+                context.commit("updateIsLoading", true)
+                await axios.post('/vue/user', user)
+                context.commit("signUpSuccess")
+                router.push("signin")
+            } catch(err) {
+                context.commit("signError", err)
+            }
+        },
+        async fetchCurrentUser(context) {
+            try {
+                context.commit("updateIsLoading", true)
+                const response = await axios.get('api/user/current')
+                context.commit("fetchCurrentUserSuccess", response.data)
+            } catch(err) {
+                context.commit("signError", err)
+            }
+        }
     },
     mutations: {
-        signUpSucess(state) {},
-        signError(state, errors) {},
-        signInSucess(state, data) {},
-        signOut(state)
+        updateIsLoading(state, isLoading) {
+            state.isLoading = isLoading
+        },
+        signUpSuccess(state) {
+            state.isLoading = false
+            state.errors = []
+        },
+        signError(state, errors) {
+            state.isLoading = false
+            state.errors = errors.response.data
+        },
+        signInSuccess(state, data) {
+            state.isLoading = false
+            state.errors = []
+            state.isLoggedIn = true
+            state.data = data.user
+            state.jwtToken = data.jwtToken
+        },
+        signOut(state){
+            state.jwtToken = null
+        },
+        fetchCurrentUser(state, user) {
+            state.data = user
+            state.isLoading = false
+            state.isLoggedIn = true
+            state.errors = []
+        }
     }
 }
 
 const store = new Vuex.Store({
     modules: {
       exercice,
-      favorite
+      favorite,
+      user
     }
   })
   

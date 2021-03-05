@@ -10,6 +10,10 @@
                 <label>Username</label>
                 <input  v-model="form.username" class="form-control" type="text">
             </div>
+             <div class="form-group">
+                <label>FirstName</label>
+                <input  v-model="form.firstname" class="form-control" type="text">
+            </div>
             <div class="form-group">
                 <label>Password</label>
                 <input  v-model="form.password" class="form-control" type="password">
@@ -30,6 +34,7 @@ export default {
             form: {
                 email: "",
                 username: "",
+                firstname: "",
                 password: ""
             }
         }
@@ -38,7 +43,7 @@ export default {
         trySubmit(e) {
             e.preventDefault()
             if(this.isValid){
-                console.log(this.form)
+                this.$store.dispatch("user/trySignUp", this.form)
             }
         },
         isValid() {
