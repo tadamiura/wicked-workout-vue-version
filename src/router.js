@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Admin from './components/Features/Admin/Admin'
+import Profile from './components/Features/Profile/Profile'
 import SignIn from './components/Auth/SignIn'
 import SignUp from './components/Auth/SignUp'
 import User from './components/Features/User'
@@ -15,6 +16,7 @@ const router = new VueRouter({
         {path: '/admin', component: Admin},
         {path: '/signin', component: SignIn},
         {path: '/signup', component: SignUp},
+        {path: '/profile', component: Profile},
         {path: '**', redirect: '/exercice'}
     ]
 })

@@ -15,6 +15,9 @@
         <li class="nav-item">
             <router-link class="nav-link" to="/admin">Admin</router-link>
         </li>
+        <li class="nav-item">
+            <router-link class="nav-link" to="/profile">Profil</router-link>
+        </li>
       </ul>
     </div>
     <div class="d-flex flex-row">

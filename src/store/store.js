@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-import axios from 'axios'
+import axios from '../http'
 import router from '../router'
 
 Vue.use(Vuex)
@@ -18,10 +18,10 @@ const exercice = {
     actions: {
         fetchDatas(context) {
             axios.get('exercices')
-            .then( res => {
-                const data = res.data
-                context.commit('addMany', data)
-            })
+                .then(res => {
+                    const data = res.data
+                    context.commit('addMany', data)
+                })
         }
     }
 }
@@ -43,12 +43,12 @@ const favorite = {
 }
 
 const user = {
-    namespaced: true, 
+    namespaced: true,
     state: {
         data: {},
         isLoading: false,
         isLoggedIn: null,
-        jwtToken: null,
+        jwtToken: localStorage.getItem("jwtToken"),
         errors: []
     },
     getters: {
@@ -60,12 +60,16 @@ const user = {
     },
     actions: {
         async trySignIn(context, credentials) {
+            // console.log('trySygnIn')
             try {
+                // console.log('trySygnIn try')
                 context.commit("updateIsLoading", true)
                 const response = await axios.post('/vue/auth', credentials)
+                // console.log('trySIgnIN response', response.data)
                 context.commit("signInSuccess", response.data)
                 router.push("/profile")
-            } catch(err) {
+            } catch (err) {
+                console.log('trySygnIn catch', err)
                 context.commit("signError", err)
             }
         },
@@ -75,16 +79,18 @@ const user = {
                 await axios.post('/vue/user', user)
                 context.commit("signUpSuccess")
                 router.push("signin")
-            } catch(err) {
+            } catch (err) {
                 context.commit("signError", err)
             }
         },
         async fetchCurrentUser(context) {
             try {
+                // console.log('TRY fetchCurrentUser')
                 context.commit("updateIsLoading", true)
-                const response = await axios.get('api/user/current')
+                const response = await axios.get('vue/user/current')
                 context.commit("fetchCurrentUserSuccess", response.data)
-            } catch(err) {
+                // console.log('fetch current user response', response.data)
+            } catch (err) {
                 context.commit("signError", err)
             }
         }
@@ -102,16 +108,22 @@ const user = {
             state.errors = errors.response.data
         },
         signInSuccess(state, data) {
-            state.isLoading = false
-            state.errors = []
-            state.isLoggedIn = true
-            state.data = data.user
-            state.jwtToken = data.jwtToken
+            // console.log('signInSuccess data.user', data.user)
+            
+            state.isLoading = false;
+            state.errors = [];
+            state.isLoggedIn = true;
+            // delete data.user.password;
+            state.data = data.user;
+            state.jwtToken = data.jwtToken;
+            // console.log('signInSuccess state', state)
+            localStorage.setItem("jwtToken", data.jwtToken);
         },
-        signOut(state){
+        signOut(state) {
             state.jwtToken = null
         },
-        fetchCurrentUser(state, user) {
+        fetchCurrentUserSuccess(state, user) {
+            // console.log('fetchCurrentUserSuccess', user)
             state.data = user
             state.isLoading = false
             state.isLoggedIn = true
@@ -122,10 +134,10 @@ const user = {
 
 const store = new Vuex.Store({
     modules: {
-      exercice,
-      favorite,
-      user
+        exercice,
+        favorite,
+        user
     }
-  })
-  
-  export default store;
+})
+
+export default store;

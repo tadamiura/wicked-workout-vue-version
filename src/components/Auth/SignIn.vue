@@ -35,6 +35,7 @@ export default {
     },
     methods: {
         trySubmit(e) {
+            // console.log(this.form)
             e.preventDefault()
             if(!this.isLoading){
                 this.$store.dispatch('user/trySignIn', this.form)
