@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import axios from '../http'
-import router from '../router'
+import router from '../routes'
 
 Vue.use(Vuex)
 
