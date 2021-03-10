@@ -1,8 +1,8 @@
 <template>
 <div class="card p-4 d-flex flex-column">
   <div>email : {{ user.email }}</div>
-  <div>nom : {{ user.username }}</div>
-    <div>prénom : {{ user.firstname }}</div>
+  <div>nom : {{ user.nom }}</div>
+    <div>prénom : {{ user.prenom }}</div>
 
 </div>
 </template>
