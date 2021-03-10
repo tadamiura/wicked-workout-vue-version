@@ -60,12 +60,9 @@ const user = {
     },
     actions: {
         async trySignIn(context, credentials) {
-            // console.log('trySygnIn')
             try {
-                // console.log('trySygnIn try')
                 context.commit("updateIsLoading", true)
                 const response = await axios.post('/vue/auth', credentials)
-                // console.log('trySIgnIN response', response.data)
                 context.commit("signInSuccess", response.data)
                 router.push("/profile")
             } catch (err) {
@@ -85,11 +82,9 @@ const user = {
         },
         async fetchCurrentUser(context) {
             try {
-                // console.log('TRY fetchCurrentUser')
                 context.commit("updateIsLoading", true)
                 const response = await axios.get('vue/user/current')
                 context.commit("fetchCurrentUserSuccess", response.data)
-                // console.log('fetch current user response', response.data)
             } catch (err) {
                 context.commit("signError", err)
             }
@@ -107,16 +102,12 @@ const user = {
             state.isLoading = false
             state.errors = errors.response.data
         },
-        signInSuccess(state, data) {
-            // console.log('signInSuccess data.user', data.user)
-            
+        signInSuccess(state, data) {            
             state.isLoading = false;
             state.errors = [];
             state.isLoggedIn = true;
-            // delete data.user.password;
             state.data = data.user;
             state.jwtToken = data.jwtToken;
-            // console.log('signInSuccess state', state)
             localStorage.setItem("jwtToken", data.jwtToken);
         },
         signOut(state) {
@@ -126,7 +117,6 @@ const user = {
             localStorage.removeItem("jwtToken")
         },
         fetchCurrentUserSuccess(state, user) {
-            // console.log('fetchCurrentUserSuccess', user)
             state.data = user
             state.isLoading = false
             state.isLoggedIn = true

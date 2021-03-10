@@ -20,7 +20,6 @@ computed: {
 },
 beforeMount() {
   if (this.jwtToken) {
-    // console.log('beforeMount fetchCurrentUser')
     this.$store.dispatch("user/fetchCurrentUser");
   }
 }
