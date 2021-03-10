@@ -47,7 +47,7 @@ const user = {
     state: {
         data: {},
         isLoading: false,
-        isLoggedIn: null,
+        isLoggedIn: localStorage.getItem("jwtToken") ? null : false,
         jwtToken: localStorage.getItem("jwtToken"),
         errors: []
     },
@@ -121,6 +121,9 @@ const user = {
         },
         signOut(state) {
             state.jwtToken = null
+            state.data = null
+            state.isLoggedIn = false
+            localStorage.removeItem("jwtToken")
         },
         fetchCurrentUserSuccess(state, user) {
             // console.log('fetchCurrentUserSuccess', user)

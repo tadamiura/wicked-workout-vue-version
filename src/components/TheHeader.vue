@@ -20,12 +20,28 @@
         </li>
       </ul>
     </div>
-    <div class="d-flex flex-row">
+    <div v-if="!jwtToken && isLoggedIn === false" class="d-flex flex-row px-3">
       <router-link to="/signin">Connexion</router-link>
       <router-link to="/signup">Inscription</router-link>
     </div>
+    <div v-if="isLoggedIn" @click="signOut" style="cursor: pointer" class="px-3">Déconnexion</div>
   </nav>
 </template>
+<script>
+import { mapGetters } from 'vuex'
+export default {
+  name: 'TheHeader',
+  computed: {
+    ...mapGetters("user", ["isLoggedIn", "jwtToken"])
+  },
+  methods: {
+    signOut() {
+      this.$store.commit('user/signOut')
+      this.$router.push("/")
+    }
+  }
+}
+</script>
 <style>
 a {
   text-decoration: none;
