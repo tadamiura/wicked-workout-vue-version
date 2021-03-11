@@ -85,7 +85,6 @@ const user = {
                 context.commit("updateIsLoading", true)
                 const response = await axios.get('vue/user/current')
                 context.commit("fetchCurrentUserSuccess", response.data)
-                console.log(response)
             } catch (err) {
                 context.commit("signError", err)
             }
