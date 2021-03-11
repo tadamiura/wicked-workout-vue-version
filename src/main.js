@@ -6,10 +6,12 @@ import store from "./store/store"
 import Embed from 'v-video-embed'
 
 Vue.config.productionTip = false
-axios.defaults.baseURL = 'https://wicked-workout-back.herokuapp.com/api/'
+
+//Master Branch API
+// axios.defaults.baseURL = 'https://wicked-workout-back.herokuapp.com/api/'
 
 //Dev WickedWorkout API
-// axios.defaults.baseURL = 'http://localhost:8080/api/'
+axios.defaults.baseURL = 'http://localhost:8080/api/'
 
 Vue.prototype.$http = axios
 

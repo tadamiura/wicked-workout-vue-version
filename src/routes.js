@@ -14,7 +14,15 @@ const router = new VueRouter({
     routes: [
         {path: '', redirect: '/exercice'},
         {path: '/exercice', component: User},
-        {path: '/admin', component: Admin},
+        {path: '/admin',
+        beforeEnter(to, from, next) {
+            if(store.getters["user/isLoggedIn"]) {
+                next()
+            } else {
+                router.push("/")
+            }
+        }, 
+        component: Admin},
         {path: '/signin', component: SignIn},
         {path: '/signup', component: SignUp},
         {path: '/profile',
