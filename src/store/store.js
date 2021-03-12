@@ -47,7 +47,7 @@ const user = {
     state: {
         data: {},
         isLoading: false,
-        isLoggedIn: localStorage.getItem("jwtToken") ? null : false,
+        isLoggedIn: localStorage.getItem("jwtToken") ? true : false,
         jwtToken: localStorage.getItem("jwtToken"),
         errors: []
     },
@@ -102,7 +102,7 @@ const user = {
             state.isLoading = false
             state.errors = errors.response.data
         },
-        signInSuccess(state, data) {            
+        signInSuccess(state, data) {
             state.isLoading = false;
             state.errors = [];
             state.isLoggedIn = true;
