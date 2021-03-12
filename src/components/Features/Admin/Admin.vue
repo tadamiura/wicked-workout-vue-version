@@ -13,7 +13,7 @@
           v-if="jwtToken && isLoggedIn"
           href="/admin/exercices/new"
           class="btn btn-primary"
-          >Aller au formulaire de création</a
+          >Ajouter un exercice</a
         >
       </div>
     </div>
@@ -22,11 +22,13 @@
         Modifier
       </div>
       <div class="card-body">
-        <h5 class="card-title">Special title treatment</h5>
+        <h5 class="card-title">Pour modifier un exercice existant</h5>
         <p class="card-text">
-          With supporting text below as a natural lead-in to additional content.
+          Accéder au formulaire de modication des exercices
         </p>
-        <a href="#" class="btn btn-primary">Go somewhere</a>
+        <a href="/admin/exercices/update" class="btn btn-primary"
+          >Modifier un exercice</a
+        >
       </div>
     </div>
     <div class="card mb-3 mx-3">

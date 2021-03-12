@@ -2,32 +2,29 @@
   <div
     class="container d-flex flex-column p-3 justify-content-center align-items-center"
   >
-    <form @submit="trySubmit" class="text-left">
-      <div class="mb-3 form-group">
-        <label>Nom de l'exercice</label>
-        <input
-          class="form-control"
-          type="text"
-          placeholder="exercice"
-          v-model="form.name"
-          required
-        />
-      </div>
+    <form @submit="trySubmit" class="form-group">
+      <label>Nom de l'exercice</label>
+      <input
+        class="form-control my-3"
+        v-model="form.name"
+        :placeholder="exercice.name"
+        required
+      />
       <div class="mb-3 form-group">
         <label>Lien URL de l'exercice</label>
         <video-embed
-          v-if="form.url_name"
           class="mx-auto"
-          :src="form.url_name"
+          :src="form.url_name ? form.url_name : exercice.url_name"
         ></video-embed>
         <input
           class="form-control"
           type="url"
-          placeholder="entrer l'url"
+          :placeholder="exercice.url_name"
           v-model="form.url_name"
         />
       </div>
-      <div class="my-3 form-check">
+      <p>L'exercice sera présent dans les circuits :</p>
+      <div class="my-3 form-check ">
         <input
           class="form-check-input"
           type="checkbox"
@@ -54,15 +51,18 @@
         />
         <label class="form-check-label">30/30</label>
       </div>
-      <button class="btn btn-primary mt-3">Envoyer</button>
+      <button class="btn btn-primary">modifier</button>
     </form>
   </div>
 </template>
 <script>
 import axios from "../../../http";
+import router from "../../../routes";
 export default {
   data() {
     return {
+      exercice: [],
+      exerciceId: null,
       form: {
         name: "",
         url_name: "",
@@ -73,7 +73,16 @@ export default {
       checkedWorkout: [],
     };
   },
+  mounted() {
+    this.fetchId();
+    axios
+      .get(`exercices/${this.exerciceId}`)
+      .then((res) => (this.exercice = res.data) && console.log(res.data));
+  },
   methods: {
+    fetchId() {
+      this.exerciceId = this.$route.params.exerciceId;
+    },
     checkboxValues() {
       if (this.checkedWorkout.includes("is_six_workout")) {
         this.form.is_six_workout = "1";
@@ -89,9 +98,10 @@ export default {
       e.preventDefault();
       this.checkboxValues();
       axios
-        .post("exercices", this.form)
+        .put(`exercices/${this.exerciceId}`, this.form)
         .then((res) => res.data)
-        .then(alert(`L'exercice ${this.form.name} a bien été ajouté`))
+        .then(alert(`L'exercice ${this.form.name} a bien été modifié`))
+        .then(router.push("/"))
         .catch((err) => console.log(err));
     },
   },
