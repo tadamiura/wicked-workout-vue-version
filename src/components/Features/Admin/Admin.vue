@@ -24,9 +24,9 @@
       <div class="card-body">
         <h5 class="card-title">Pour modifier un exercice existant</h5>
         <p class="card-text">
-          Accéder au formulaire de modication des exercices
+          Accéder à la liste des exercies existants pour une modification
         </p>
-        <a href="/admin/exercices/update" class="btn btn-primary"
+        <a href="/admin/exercices/update" class="btn btn-secondary"
           >Modifier un exercice</a
         >
       </div>
@@ -36,11 +36,13 @@
         Supprimer
       </div>
       <div class="card-body">
-        <h5 class="card-title">Special title treatment</h5>
+        <h5 class="card-title">Pour supprimer un exercice existant</h5>
         <p class="card-text">
-          With supporting text below as a natural lead-in to additional content.
+          Accéder à la liste des exercices existants pour une suppression
         </p>
-        <a href="#" class="btn btn-primary">Go somewhere</a>
+        <a href="/admin/exercices/delete" class="btn btn-danger"
+          >Supprimer un exercice</a
+        >
       </div>
     </div>
   </div>

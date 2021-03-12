@@ -2,6 +2,7 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Admin from './components/Features/Admin/Admin'
 import AdminAddExercice from './components/Features/Admin/AdminAddExercice'
+import AdminDeleteExercicesList from './components/Features/Admin/AdminDeleteExercicesList'
 import AdminUpdateExercicesList from './components/Features/Admin/AdminUpdateExercicesList'
 import AdminUpdateThisExercice from './components/Features/Admin/AdminUpdateThisExercice'
 import Profile from './components/Features/Profile/Profile'
@@ -66,6 +67,17 @@ const router = new VueRouter({
                 }
             },
             component: AdminUpdateThisExercice
+        },
+        {
+            path: '/admin/exercices/delete',
+            beforeEnter(to, from, next) {
+                if (store.getters["user/isLoggedIn"]) {
+                    next()
+                } else {
+                    router.push("/")
+                }
+            },
+            component: AdminDeleteExercicesList
         },
         {
             path: '/signin',
