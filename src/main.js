@@ -19,6 +19,6 @@ Vue.use(Embed);
 
 new Vue({
   router,
-  store, 
+  store,
   render: h => h(App),
 }).$mount('#app')
