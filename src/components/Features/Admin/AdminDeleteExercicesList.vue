@@ -15,7 +15,9 @@
 </template>
 <script>
 import { mapState } from "vuex";
-import axios from "../../../http";
+// import axios from "../../../http";
+// import router from "../../../routes";
+
 export default {
   computed: {
     ...mapState("exercice", {
@@ -26,12 +28,19 @@ export default {
     this.$store.dispatch("exercice/fetchDatas");
   },
   methods: {
+    // async tryDelete(exerciceId) {
+    //   try {
+    //     axios
+    //       .delete(`exercices/${exerciceId}`)
+    //       .then((res) => res.data)
+    //       .then(alert(`L'exercice a bien été supprimé`));
+    //     router.push("/admin");
+    //   } catch (err) {
+    //     console.log(err);
+    //   }
+    // },
     tryDelete(exerciceId) {
-      axios
-        .delete(`exercices/${exerciceId}`)
-        .then((res) => res.data)
-        .then(alert(`L'exercice a bien été supprimer`))
-        .catch((err) => console.log(err));
+      this.$store.dispatch("exercice/tryDelete", exerciceId);
     },
   },
 };
