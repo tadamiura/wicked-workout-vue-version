@@ -50,6 +50,7 @@ const exercice = {
                     .post("exercices", credentials)
                     .then((res) => res.data)
                     .then(alert(`L'exercice ${credentials.name} a bien été ajouté`))
+                router.push('/admin')
             } catch (err) {
                 console.log(err)
             }
