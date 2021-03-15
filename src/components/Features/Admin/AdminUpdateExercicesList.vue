@@ -6,7 +6,7 @@
           {{ exercice.name }}
         </h5>
         <video-embed class="mx-auto" :src="exercice.url_name"></video-embed>
-        <button class="btn btn-primary" @click="goTo(exercice.id)">
+        <button class="btn btn-secondary" @click="goTo(exercice.id)">
           Modifier
         </button>
       </div>
