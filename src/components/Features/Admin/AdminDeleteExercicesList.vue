@@ -29,7 +29,7 @@ export default {
     tryDelete(exerciceId) {
       axios
         .delete(`exercices/${exerciceId}`)
-        .then((res) => console.log(res.data) && res.data)
+        .then((res) => res.data)
         .then(alert(`L'exercice a bien été supprimer`))
         .catch((err) => console.log(err));
     },

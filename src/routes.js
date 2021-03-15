@@ -29,7 +29,7 @@ const router = new VueRouter({
                 if (store.getters["user/isLoggedIn"]) {
                     next()
                 } else {
-                    router.push("/")
+                    router.push("/signin")
                 }
             },
             component: Admin
@@ -40,7 +40,7 @@ const router = new VueRouter({
                 if (store.getters["user/isLoggedIn"]) {
                     next()
                 } else {
-                    router.push("/")
+                    router.push("/signin")
                 }
             },
             component: AdminAddExercice
@@ -51,7 +51,7 @@ const router = new VueRouter({
                 if (store.getters["user/isLoggedIn"]) {
                     next()
                 } else {
-                    router.push("/")
+                    router.push("/signin")
                 }
             },
             component: AdminUpdateExercicesList
@@ -63,7 +63,7 @@ const router = new VueRouter({
                 if (store.getters["user/isLoggedIn"]) {
                     next()
                 } else {
-                    router.push("/")
+                    router.push("/signin")
                 }
             },
             component: AdminUpdateThisExercice
@@ -74,7 +74,7 @@ const router = new VueRouter({
                 if (store.getters["user/isLoggedIn"]) {
                     next()
                 } else {
-                    router.push("/")
+                    router.push("/signin")
                 }
             },
             component: AdminDeleteExercicesList
@@ -93,7 +93,7 @@ const router = new VueRouter({
                 if (store.getters["user/isLoggedIn"]) {
                     next()
                 } else {
-                    router.push("/")
+                    router.push("/signin")
                 }
             },
             component: Profile

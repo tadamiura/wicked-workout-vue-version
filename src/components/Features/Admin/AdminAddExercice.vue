@@ -59,7 +59,6 @@
   </div>
 </template>
 <script>
-import axios from "../../../http";
 export default {
   data() {
     return {
@@ -88,11 +87,7 @@ export default {
     trySubmit(e) {
       e.preventDefault();
       this.checkboxValues();
-      axios
-        .post("exercices", this.form)
-        .then((res) => res.data)
-        .then(alert(`L'exercice ${this.form.name} a bien été ajouté`))
-        .catch((err) => console.log(err));
+      this.$store.dispatch("exercice/tryAddExercice", this.form);
     },
   },
 };

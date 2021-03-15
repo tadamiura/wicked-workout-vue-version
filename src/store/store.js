@@ -8,7 +8,24 @@ Vue.use(Vuex)
 const exercice = {
     namespaced: true,
     state: {
-        datas: []
+        datas: [],
+        form: {
+            name: "",
+            url_name: "",
+            is_six_workout: "0",
+            is_tabata_workout: "0",
+            is_thirty_thirty_workout: "0",
+        },
+        checkedWorkout: [],
+    },
+    getters: {
+        datas: state => state.datas,
+        name: state => state.form.name,
+        url_name: state => state.form.url_name,
+        is_six_workout: state => state.form.is_six_workout,
+        is_tabata_workout: state => state.form.is_tabata_workout,
+        is_thirty_thirty_workout: state => state.form.is_thirty_thirty_workout,
+        checkedWorkout: state => state.checkedWorkout
     },
     mutations: {
         addMany(state, exercices) {
@@ -16,12 +33,26 @@ const exercice = {
         }
     },
     actions: {
-        fetchDatas(context) {
-            axios.get('exercices')
-                .then(res => {
-                    const data = res.data
-                    context.commit('addMany', data)
-                })
+        async fetchDatas(context) {
+            try {
+                await axios.get('exercices')
+                    .then(res => {
+                        const data = res.data
+                        context.commit('addMany', data)
+                    })
+            } catch (err) {
+                console.log(err)
+            }
+        },
+        async tryAddExercice(context, credentials) {
+            try {
+                axios
+                    .post("exercices", credentials)
+                    .then((res) => res.data)
+                    .then(alert(`L'exercice ${credentials.name} a bien été ajouté`))
+            } catch (err) {
+                console.log(err)
+            }
         }
     }
 }
