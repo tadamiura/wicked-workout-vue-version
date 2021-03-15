@@ -25,7 +25,7 @@ const exercice = {
         is_six_workout: state => state.form.is_six_workout,
         is_tabata_workout: state => state.form.is_tabata_workout,
         is_thirty_thirty_workout: state => state.form.is_thirty_thirty_workout,
-        checkedWorkout: state => state.checkedWorkout
+        checkedWorkout: state => state.checkedWorkout,
     },
     mutations: {
         addMany(state, exercices) {
@@ -50,11 +50,34 @@ const exercice = {
                     .post("exercices", credentials)
                     .then((res) => res.data)
                     .then(alert(`L'exercice ${credentials.name} a bien été ajouté`))
+                router.push('/admin')
             } catch (err) {
                 console.log(err)
             }
+        },
+        async tryDelete(context, exerciceId) {
+            try {
+                axios
+                    .delete(`exercices/${exerciceId}`)
+                    .then((res) => res.data)
+                    .then(alert(`L'exercice a bien été supprimé`))
+                router.push('/admin')
+            } catch (err) {
+                console.log(err)
+            }
+        },
+        async tryUpdate(context, credentials) {
+            try {
+                await axios
+                    .put(`exercices/${credentials.exerciceId}`, credentials.form)
+                    .then((res) => res.data)
+                    .then(alert(`L'exercice ${credentials.form.name} a bien été modifié`));
+                router.push("/admin");
+            } catch (err) {
+                console.log(err);
+            }
         }
-    }
+    },
 }
 
 const favorite = {
