@@ -57,7 +57,7 @@
 </template>
 <script>
 import axios from "../../../http";
-import router from "../../../routes";
+// import router from "../../../routes";
 export default {
   data() {
     return {
@@ -77,7 +77,7 @@ export default {
     this.fetchId();
     axios
       .get(`exercices/${this.exerciceId}`)
-      .then((res) => (this.exercice = res.data) && console.log(res.data));
+      .then((res) => (this.exercice = res.data));
   },
   methods: {
     fetchId() {
@@ -97,12 +97,10 @@ export default {
     trySubmit(e) {
       e.preventDefault();
       this.checkboxValues();
-      axios
-        .put(`exercices/${this.exerciceId}`, this.form)
-        .then((res) => res.data)
-        .then(alert(`L'exercice ${this.form.name} a bien été modifié`))
-        .then(router.push("/"))
-        .catch((err) => console.log(err));
+      this.$store.dispatch("exercice/tryUpdate", {
+        form: this.form,
+        exerciceId: this.exerciceId,
+      });
     },
   },
 };

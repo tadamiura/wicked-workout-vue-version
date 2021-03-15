@@ -66,6 +66,17 @@ const exercice = {
                 console.log(err)
             }
         },
+        async tryUpdate(context, credentials) {
+            try {
+                await axios
+                    .put(`exercices/${credentials.exerciceId}`, credentials.form)
+                    .then((res) => res.data)
+                    .then(alert(`L'exercice ${credentials.form.name} a bien été modifié`));
+                router.push("/admin");
+            } catch (err) {
+                console.log(err);
+            }
+        }
     },
 }
 
