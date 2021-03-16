@@ -1,12 +1,14 @@
 <template>
   <div class="card p-4 d-flex flex-column">
     <div v-if="showForm === false">
+      <!-- <div>email : {{ user.id }}</div> -->
+
       <div>email : {{ user.email }}</div>
       <div>nom : {{ user.nom }}</div>
       <div>prénom : {{ user.prenom }}</div>
     </div>
     <div v-else>
-      <form class="text-left">
+      <form @submit="tryUpdateUser" class="text-left">
         <div class="mb-3 form-group">
           <label>Email</label>
           <input
@@ -33,11 +35,14 @@
             required
           />
         </div>
+        <button class="btn btn-primary mt-3">
+          Valider
+        </button>
       </form>
     </div>
     <button @click="updateUserInfo" class="btn btn-secondary my-3">
-      <span v-if="showForm"> Modifier mes informations</span>
-      <span v-else>Retour</span>
+      <span v-if="showForm">Retour</span>
+      <span v-else>Modifier mes informations</span>
     </button>
   </div>
 </template>
@@ -49,6 +54,7 @@ export default {
     return {
       showForm: false,
       form: {
+        id: null,
         email: "",
         username: "",
         firstname: "",
@@ -65,6 +71,11 @@ export default {
   methods: {
     updateUserInfo() {
       this.showForm = !this.showForm;
+    },
+    tryUpdateUser(e) {
+      e.preventDefault();
+      this.form.id = this.user.id;
+      this.$store.dispatch("user/tryUpdateUser", this.form);
     },
   },
 };
