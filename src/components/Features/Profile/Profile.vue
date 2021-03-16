@@ -1,8 +1,6 @@
 <template>
   <div class="card p-4 d-flex flex-column">
     <div v-if="showForm === false">
-      <!-- <div>email : {{ user.id }}</div> -->
-
       <div>email : {{ user.email }}</div>
       <div>nom : {{ user.nom }}</div>
       <div>prénom : {{ user.prenom }}</div>
