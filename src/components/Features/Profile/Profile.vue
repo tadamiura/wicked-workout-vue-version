@@ -1,17 +1,71 @@
 <template>
-<div class="card p-4 d-flex flex-column">
-  <div>email : {{ user.email }}</div>
-  <div>nom : {{ user.nom }}</div>
-    <div>prénom : {{ user.prenom }}</div>
-
-</div>
+  <div class="card p-4 d-flex flex-column">
+    <div v-if="showForm === false">
+      <div>email : {{ user.email }}</div>
+      <div>nom : {{ user.nom }}</div>
+      <div>prénom : {{ user.prenom }}</div>
+    </div>
+    <div v-else>
+      <form class="text-left">
+        <div class="mb-3 form-group">
+          <label>Email</label>
+          <input
+            class="form-control"
+            type="email"
+            :placeholder="user.email"
+            v-model="form.email"
+            required
+          />
+          <label>Nom</label>
+          <input
+            class="form-control"
+            type="text"
+            :placeholder="user.nom"
+            v-model="form.username"
+            required
+          />
+          <label>Prénom</label>
+          <input
+            class="form-control"
+            type="text"
+            :placeholder="user.prenom"
+            v-model="form.firstname"
+            required
+          />
+        </div>
+      </form>
+    </div>
+    <button @click="updateUserInfo" class="btn btn-secondary my-3">
+      <span v-if="showForm"> Modifier mes informations</span>
+      <span v-else>Retour</span>
+    </button>
+  </div>
 </template>
 <script>
-import { mapGetters } from 'vuex'
+import { mapGetters } from "vuex";
 export default {
-    name: "Profile",
-    computed: {
-        ...mapGetters("user", { user: "currentUser"})
-    }
-}
+  name: "Profile",
+  data() {
+    return {
+      showForm: false,
+      form: {
+        email: "",
+        username: "",
+        firstname: "",
+      },
+    };
+  },
+  computed: {
+    ...mapGetters("user", {
+      user: "currentUser",
+      jwtToken: "jwtToken",
+      isLoggedIn: "isLoggedIn",
+    }),
+  },
+  methods: {
+    updateUserInfo() {
+      this.showForm = !this.showForm;
+    },
+  },
+};
 </script>
