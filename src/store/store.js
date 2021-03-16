@@ -142,6 +142,16 @@ const user = {
             } catch (err) {
                 context.commit("signError", err)
             }
+        },
+        async tryUpdateUser(context, user) {
+            try {
+                await axios.put(`vue/user/${user.id}`, user)
+                    .then(res => res.data)
+                    .then(alert('Utilisateur modifié'))
+                router.push('/')
+            } catch (err) {
+                alert('Echec de la modification')
+            }
         }
     },
     mutations: {
